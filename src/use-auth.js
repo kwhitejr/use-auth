@@ -3,11 +3,11 @@ import React, {
 } from 'react';
 import { Auth } from '@aws-amplify/auth';
 
+// Implement your particular AWS Amplify configuration
 const amplifyConfigurationOptions = {
   userPoolRegion: "REGION",
   userPoolId: "POOL_ID",
   userPoolWebClientId: "CLIENT_ID",
-  // ...your configuration...
 };
 
 Auth.configure(amplifyConfigurationOptions);
@@ -30,6 +30,9 @@ function useProvideAuth() {
   useEffect(() => {
     // NOTE: check for user or risk an infinite loop
     if (!user) {
+      // On component mount
+      // If a session cookie exists
+      // Then use it to reset auth state
       Auth.currentSession()
         .then((session) => {
           const {
@@ -37,7 +40,7 @@ function useProvideAuth() {
             accessToken,
           } = session;
 
-          // Define your user schema for your app's convenience
+          // Define your user schema per your needs
           const user = {
             email: idToken.payload.email,
             username: idToken.payload.preferred_username,
@@ -56,7 +59,7 @@ function useProvideAuth() {
 
   const signIn = ({ email, password }) => Auth.signIn(email, password)
     .then((cognitoUser) => {
-      // Set access token to memory
+      // Set user data and access token to memory
       const {
         attributes,
         signInUserSession: {
