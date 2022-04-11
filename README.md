@@ -1,5 +1,5 @@
-# use-auth
-Source code and test for a React useAuth hook implemented with AWS Cognito.
+# UseAuth Hook
+[Source code](./src/use-auth.js) and [test](./__tests__/use-auth.test.jsx) for a React useAuth hook implemented with [AWS Amplify Auth](https://www.npmjs.com/package/@aws-amplify/auth).
 
 ## Usage
 
